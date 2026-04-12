@@ -1,0 +1,23 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- CalVer: YYYY.M.patch — update here for new releases -->
+    <VersionPrefix>2026.4.2</VersionPrefix>
+    <!-- Set VersionSuffix (e.g. "preview.1", "rc.1") for pre-releases -->
+    <!-- <VersionSuffix>preview.1</VersionSuffix> -->
+
+    <!-- Shared metadata -->
+    <Authors>Rev. Fr. Bedros Buldukian (Arman Buldukoglu)</Authors>
+    <PackageProjectUrl>https://github.com/DerBedros-Labs/SwiftMediator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DerBedros-Labs/SwiftMediator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) 2026 Rev. Fr. Bedros Buldukian</Copyright>
+
+    <!-- XML documentation for IntelliSense in NuGet packages -->
+    <!-- Note: placed in individual .csproj files rather than here because
+         Directory.Build.props is evaluated before IsPackable/IsTestProject are set. -->
+
+  </PropertyGroup>
+
+</Project>

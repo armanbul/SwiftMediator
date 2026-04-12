@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwiftMediator.Contracts</name>
+    </assembly>
+    <members>
+        <member name="T:SwiftMediator.Core.INotification">
+            <summary>
+            Marker interface to represent a notification.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.IRequest">
+            <summary>
+            Defines a marker interface to represent a request with a void response.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.IRequest`1">
+            <summary>
+            Defines a marker interface to represent a request with a response.
+            </summary>
+            <typeparam name="TResponse">Response type</typeparam>
+        </member>
+        <member name="T:SwiftMediator.Core.IStreamRequest`1">
+            <summary>
+            Marker interface for a streaming request.
+            </summary>
+            <typeparam name="TResponse">The type of each streamed item</typeparam>
+        </member>
+        <member name="T:SwiftMediator.Core.Unit">
+            <summary>
+            Represents a unit of execution that returns no value.
+            </summary>
+        </member>
+        <member name="F:SwiftMediator.Core.Unit.Value">
+            <summary>The singleton value of <see cref="T:SwiftMediator.Core.Unit"/>.</summary>
+        </member>
+        <member name="M:SwiftMediator.Core.Unit.Equals(SwiftMediator.Core.Unit)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SwiftMediator.Core.Unit.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SwiftMediator.Core.Unit.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:SwiftMediator.Core.Unit.op_Equality(SwiftMediator.Core.Unit,SwiftMediator.Core.Unit)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SwiftMediator.Core.Unit.op_Inequality(SwiftMediator.Core.Unit,SwiftMediator.Core.Unit)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

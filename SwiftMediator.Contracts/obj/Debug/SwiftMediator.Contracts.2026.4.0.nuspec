@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SwiftMediator.Contracts</id>
+    <version>2026.4.0</version>
+    <authors>Rev. Fr. Bedros Buldukian (Arman Buldukoglu)</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/armanbul/SwiftMediator</projectUrl>
+    <description>Contracts-only package for SwiftMediator. Contains marker interfaces (IRequest, INotification, IStreamRequest) for use in shared/API projects without pulling in the full mediator implementation.</description>
+    <copyright>Copyright (c) 2026 Rev. Fr. Bedros Buldukian</copyright>
+    <tags>mediator contracts cqrs source-generator</tags>
+    <repository type="git" url="https://github.com/armanbul/SwiftMediator" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Projects\Mediator\SwiftMediator.Contracts\bin\Debug\netstandard2.0\SwiftMediator.Contracts.dll" target="lib\netstandard2.0\SwiftMediator.Contracts.dll" />
+    <file src="D:\Projects\Mediator\SwiftMediator.Contracts\README.md" target="\README.md" />
+  </files>
+</package>

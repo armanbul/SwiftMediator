@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="SwiftMediator.Contracts/SwiftMediator.Contracts.csproj" />
+  <Project Path="SwiftMediator.Core/SwiftMediator.Core.csproj" />
+  <Project Path="SwiftMediator.Generator/SwiftMediator.Generator.csproj" />
+  <Project Path="SwiftMediator.Tests/SwiftMediator.Tests.csproj" />
+  <Folder Name="/samples/">
+    <Project Path="samples/BasicUsage/BasicUsage.csproj" />
+    <Project Path="samples/CqrsWithValidation/CqrsWithValidation.csproj" />
+    <Project Path="samples/AdvancedPipeline/AdvancedPipeline.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,13 @@
+D:\Projects\Mediator\SwiftMediator.Core\obj\Debug\netstandard2.0\SwiftMediator.Core.csproj.AssemblyReference.cache
+D:\Projects\Mediator\SwiftMediator.Core\obj\Debug\netstandard2.0\SwiftMediator.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Mediator\SwiftMediator.Core\obj\Debug\netstandard2.0\SwiftMediator.Core.AssemblyInfoInputs.cache
+D:\Projects\Mediator\SwiftMediator.Core\obj\Debug\netstandard2.0\SwiftMediator.Core.AssemblyInfo.cs
+D:\Projects\Mediator\SwiftMediator.Core\obj\Debug\netstandard2.0\SwiftMediator.Core.csproj.CoreCompileInputs.cache
+D:\Projects\Mediator\SwiftMediator.Core\bin\Debug\netstandard2.0\SwiftMediator.Core.deps.json
+D:\Projects\Mediator\SwiftMediator.Core\bin\Debug\netstandard2.0\SwiftMediator.Core.dll
+D:\Projects\Mediator\SwiftMediator.Core\bin\Debug\netstandard2.0\SwiftMediator.Core.pdb
+D:\Projects\Mediator\SwiftMediator.Core\bin\Debug\netstandard2.0\SwiftMediator.Contracts.dll
+D:\Projects\Mediator\SwiftMediator.Core\bin\Debug\netstandard2.0\SwiftMediator.Contracts.pdb
+D:\Projects\Mediator\SwiftMediator.Core\obj\Debug\netstandard2.0\SwiftMed.A09B9BFD.Up2Date
+D:\Projects\Mediator\SwiftMediator.Core\obj\Debug\netstandard2.0\SwiftMediator.Core.dll
+D:\Projects\Mediator\SwiftMediator.Core\obj\Debug\netstandard2.0\SwiftMediator.Core.pdb

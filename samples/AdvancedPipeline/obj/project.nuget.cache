@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "c4+iWILT+Jg=",
+  "success": true,
+  "projectFilePath": "/home/runner/work/SwiftMediator/SwiftMediator/samples/AdvancedPipeline/AdvancedPipeline.csproj",
+  "expectedPackageFiles": [
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.0/microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0/microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

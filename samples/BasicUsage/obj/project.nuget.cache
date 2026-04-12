@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "UUKmD1FhGlQ=",
+  "success": true,
+  "projectFilePath": "/home/runner/work/SwiftMediator/SwiftMediator/samples/BasicUsage/BasicUsage.csproj",
+  "expectedPackageFiles": [
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.0/microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0/microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

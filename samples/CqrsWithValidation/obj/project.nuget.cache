@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "yZE8pcGduNo=",
+  "success": true,
+  "projectFilePath": "/home/runner/work/SwiftMediator/SwiftMediator/samples/CqrsWithValidation/CqrsWithValidation.csproj",
+  "expectedPackageFiles": [
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.0/microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0/microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

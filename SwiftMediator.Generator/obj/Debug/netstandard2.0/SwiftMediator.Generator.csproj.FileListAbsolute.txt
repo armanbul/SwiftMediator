@@ -1,0 +1,10 @@
+D:\Projects\Mediator\SwiftMediator.Generator\obj\Debug\netstandard2.0\SwiftMediator.Generator.csproj.AssemblyReference.cache
+D:\Projects\Mediator\SwiftMediator.Generator\obj\Debug\netstandard2.0\SwiftMediator.Generator.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Mediator\SwiftMediator.Generator\obj\Debug\netstandard2.0\SwiftMediator.Generator.AssemblyInfoInputs.cache
+D:\Projects\Mediator\SwiftMediator.Generator\obj\Debug\netstandard2.0\SwiftMediator.Generator.AssemblyInfo.cs
+D:\Projects\Mediator\SwiftMediator.Generator\obj\Debug\netstandard2.0\SwiftMediator.Generator.csproj.CoreCompileInputs.cache
+D:\Projects\Mediator\SwiftMediator.Generator\bin\Debug\netstandard2.0\SwiftMediator.Generator.deps.json
+D:\Projects\Mediator\SwiftMediator.Generator\bin\Debug\netstandard2.0\SwiftMediator.Generator.dll
+D:\Projects\Mediator\SwiftMediator.Generator\bin\Debug\netstandard2.0\SwiftMediator.Generator.pdb
+D:\Projects\Mediator\SwiftMediator.Generator\obj\Debug\netstandard2.0\SwiftMediator.Generator.dll
+D:\Projects\Mediator\SwiftMediator.Generator\obj\Debug\netstandard2.0\SwiftMediator.Generator.pdb

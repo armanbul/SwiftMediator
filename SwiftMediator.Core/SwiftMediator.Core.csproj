@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net8.0;netstandard2.0;net462</TargetFrameworks>
+    <LangVersion>12</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- AOT / Trim Compatibility (net8.0+ only) -->
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
+    <IsTrimmable Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsTrimmable>
+    <!-- NuGet Package Properties -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>SwiftMediator</PackageId>
+    <Description>High-performance, zero-allocation, source-generated mediator pattern library for .NET. Supports .NET 8+, .NET Standard 2.0, and .NET Framework 4.6.2+.</Description>
+    <PackageTags>mediator;mediatr;source-generator;performance;aot</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IncludeBuildOutput>true</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>false</SuppressDependenciesWhenPacking>
+    <!-- XML documentation for IntelliSense in NuGet packages -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Symbol packages for NuGet debugging support -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <!-- Include README in the NuGet package -->
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Reference the generator project without including it as a runtime dependency -->
+  <ItemGroup>
+    <ProjectReference Include="..\SwiftMediator.Generator\SwiftMediator.Generator.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" Pack="false" />
+    <ProjectReference Include="..\SwiftMediator.Contracts\SwiftMediator.Contracts.csproj" />
+  </ItemGroup>
+
+  <!-- DI Abstractions (needed by MediatorServiceConfiguration) -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <!-- Polyfills for netstandard2.0 / net462 (IAsyncEnumerable, ValueTask) -->
+  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+  </ItemGroup>
+
+  <!-- Bundle the Generator dll into the analyzers folder of the NuGet package -->
+  <PropertyGroup>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);PackGenerator</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <Target Name="PackGenerator" Condition="'$(TargetFramework)' == 'net10.0'">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="..\SwiftMediator.Generator\bin\$(Configuration)\netstandard2.0\SwiftMediator.Generator.dll">
+        <PackagePath>analyzers\dotnet\cs</PackagePath>
+      </TfmSpecificPackageFile>
+    </ItemGroup>
+  </Target>
+
+</Project>

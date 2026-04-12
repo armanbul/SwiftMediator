@@ -1,0 +1,24 @@
+{
+  "runtimeTarget": {
+    "name": ".NETStandard,Version=v2.0/",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETStandard,Version=v2.0": {},
+    ".NETStandard,Version=v2.0/": {
+      "SwiftMediator.Contracts/2026.4.0": {
+        "runtime": {
+          "SwiftMediator.Contracts.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SwiftMediator.Contracts/2026.4.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

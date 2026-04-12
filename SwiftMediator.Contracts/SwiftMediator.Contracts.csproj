@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>11.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <!-- NuGet Package Properties -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>SwiftMediator.Contracts</PackageId>
+    <Description>Contracts-only package for SwiftMediator. Contains marker interfaces (IRequest, INotification, IStreamRequest) for use in shared/API projects without pulling in the full mediator implementation.</Description>
+    <PackageTags>mediator;contracts;cqrs;source-generator</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <!-- XML documentation for IntelliSense in NuGet packages -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Symbol packages for NuGet debugging support -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
