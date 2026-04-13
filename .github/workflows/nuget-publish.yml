@@ -54,9 +54,22 @@ jobs:
         dotnet pack SwiftMediator.Contracts -c Release --no-build --output ./artifacts -p:Version=${{ steps.version.outputs.VERSION }}
 
     - name: Push to NuGet.org
+      shell: pwsh
       run: |
-        dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
-        dotnet nuget push ./artifacts/*.snupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+       $apiKey = "${{ secrets.NUGET_API_KEY }}"
+       $source = "https://api.nuget.org/v3/index.json"
+       # Önce .nupkg (ana paket) yükle
+       Get-ChildItem -Path "./artifacts" -Filter "*.nupkg" -File |
+        Where-Object { $_.Name -notlike "*.snupkg" } |
+        ForEach-Object {
+         dotnet nuget push $_.FullName --api-key $apiKey --source $source --skip-duplicate
+        }
+
+        # Sonra .snupkg (symbols) yükle
+        Get-ChildItem -Path "./artifacts" -Filter "*.snupkg" -File |
+          ForEach-Object {
+            dotnet nuget push $_.FullName --api-key $apiKey --source $source --skip-duplicate
+          }
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
