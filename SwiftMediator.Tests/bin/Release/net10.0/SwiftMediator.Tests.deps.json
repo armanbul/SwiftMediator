@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "SwiftMediator.Tests/2026.4.0": {
+      "SwiftMediator.Tests/2026.4.3": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "9.0.0",
           "Microsoft.NET.Test.Sdk": "17.14.1",
-          "SwiftMediator": "2026.4.0",
+          "SwiftMediator": "2026.4.3",
           "xunit": "2.9.3",
-          "SwiftMediator.Core": "2026.4.0.0"
+          "SwiftMediator.Core": "2026.4.3.0"
         },
         "runtime": {
           "SwiftMediator.Tests.dll": {}
@@ -312,7 +312,7 @@
         "runtime": {
           "lib/netstandard2.0/xunit.abstractions.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.0.0.0"
           }
         }
       },
@@ -352,38 +352,38 @@
           }
         }
       },
-      "SwiftMediator/2026.4.0": {
+      "SwiftMediator/2026.4.3": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.0",
-          "SwiftMediator.Contracts": "2026.4.0"
+          "SwiftMediator.Contracts": "2026.4.3"
         },
         "runtime": {
           "SwiftMediator.Core.dll": {
-            "assemblyVersion": "2026.4.0.0",
-            "fileVersion": "2026.4.0.0"
+            "assemblyVersion": "2026.4.3.0",
+            "fileVersion": "2026.4.3.0"
           }
         }
       },
-      "SwiftMediator.Contracts/2026.4.0": {
+      "SwiftMediator.Contracts/2026.4.3": {
         "runtime": {
           "SwiftMediator.Contracts.dll": {
-            "assemblyVersion": "2026.4.0.0",
-            "fileVersion": "2026.4.0.0"
+            "assemblyVersion": "2026.4.3.0",
+            "fileVersion": "2026.4.3.0"
           }
         }
       },
-      "SwiftMediator.Core/2026.4.0.0": {
+      "SwiftMediator.Core/2026.4.3.0": {
         "runtime": {
           "SwiftMediator.Core.dll": {
-            "assemblyVersion": "2026.4.0.0",
-            "fileVersion": "2026.4.0.0"
+            "assemblyVersion": "2026.4.3.0",
+            "fileVersion": "2026.4.3.0"
           }
         }
       }
     }
   },
   "libraries": {
-    "SwiftMediator.Tests/2026.4.0": {
+    "SwiftMediator.Tests/2026.4.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -479,17 +479,17 @@
       "path": "xunit.extensibility.execution/2.9.3",
       "hashPath": "xunit.extensibility.execution.2.9.3.nupkg.sha512"
     },
-    "SwiftMediator/2026.4.0": {
+    "SwiftMediator/2026.4.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "SwiftMediator.Contracts/2026.4.0": {
+    "SwiftMediator.Contracts/2026.4.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "SwiftMediator.Core/2026.4.0.0": {
+    "SwiftMediator.Core/2026.4.3.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

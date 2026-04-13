@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'NuGet package version (e.g. 2026.4.2)'
+        description: 'NuGet package version (e.g. 2026.4.3)'
         required: true
-        default: '2026.4.2'
+        default: '2026.4.3'
 
 jobs:
   publish:
@@ -54,10 +54,14 @@ jobs:
         dotnet pack SwiftMediator.Contracts -c Release --no-build --output ./artifacts -p:Version=${{ steps.version.outputs.VERSION }}
 
     - name: Push to NuGet.org
-      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: |
+        dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        dotnet nuget push ./artifacts/*.snupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
-        files: ./artifacts/*.nupkg
+        files: |
+          ./artifacts/*.nupkg
+          ./artifacts/*.snupkg
         generate_release_notes: true

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- CalVer: YYYY.M.patch — update here for new releases -->
-    <VersionPrefix>2026.4.2</VersionPrefix>
+    <VersionPrefix>2026.4.3</VersionPrefix>
     <!-- Set VersionSuffix (e.g. "preview.1", "rc.1") for pre-releases -->
     <!-- <VersionSuffix>preview.1</VersionSuffix> -->
 
@@ -14,10 +14,14 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright (c) 2026 Rev. Fr. Bedros Buldukian</Copyright>
 
-    <!-- XML documentation for IntelliSense in NuGet packages -->
-    <!-- Note: placed in individual .csproj files rather than here because
-         Directory.Build.props is evaluated before IsPackable/IsTestProject are set. -->
+    <!-- Deterministic CI builds: reproducible PDBs with no local paths -->
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
 
   </PropertyGroup>
+
+  <!-- Source Link: enables debugging into source from NuGet packages -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
+  </ItemGroup>
 
 </Project>

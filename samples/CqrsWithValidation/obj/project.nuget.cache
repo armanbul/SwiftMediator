@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "zgamVgtG7e0=",
+  "dgSpecHash": "cSZ+52HPcfM=",
   "success": true,
   "projectFilePath": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\samples\\CqrsWithValidation\\CqrsWithValidation.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\arman\\.nuget\\packages\\microsoft.build.tasks.git\\8.0.0\\microsoft.build.tasks.git.8.0.0.nupkg.sha512",
     "C:\\Users\\arman\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.0\\microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
     "C:\\Users\\arman\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.0\\microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
-    "C:\\Users\\arman\\.nuget\\packages\\swiftmediator\\2026.4.2\\swiftmediator.2026.4.2.nupkg.sha512",
-    "C:\\Users\\arman\\.nuget\\packages\\swiftmediator.contracts\\2026.4.2\\swiftmediator.contracts.2026.4.2.nupkg.sha512"
+    "C:\\Users\\arman\\.nuget\\packages\\microsoft.sourcelink.common\\8.0.0\\microsoft.sourcelink.common.8.0.0.nupkg.sha512",
+    "C:\\Users\\arman\\.nuget\\packages\\microsoft.sourcelink.github\\8.0.0\\microsoft.sourcelink.github.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }

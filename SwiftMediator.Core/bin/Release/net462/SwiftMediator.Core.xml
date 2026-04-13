@@ -73,7 +73,7 @@
         </member>
         <member name="T:SwiftMediator.Core.TaskWhenAllPublisher">
             <summary>
-            Notification publisher that awaits all handlers in parallel using <see cref="M:System.Threading.Tasks.Task.WhenAll(System.Collections.Generic.IEnumerable{System.Threading.Tasks.Task})"/>.
+            Notification publisher that awaits all handlers in parallel using <see cref="M:System.Threading.Tasks.Task.WhenAll(System.Threading.Tasks.Task[])"/>.
             </summary>
         </member>
         <member name="M:SwiftMediator.Core.TaskWhenAllPublisher.Publish(System.Collections.Generic.IEnumerable{SwiftMediator.Core.NotificationHandlerExecutor},SwiftMediator.Core.INotification,System.Threading.CancellationToken)">
@@ -143,7 +143,7 @@
             <summary>
             Defines a handler for exceptions thrown during request processing.
             Multiple exception handlers can be registered for the same request type;
-            they execute in registration order. Set <see cref="!:RequestExceptionHandlerState.Handled"/>
+            they execute in registration order. Set <see cref="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Handled"/>
             to stop propagation.
             </summary>
             <typeparam name="TRequest">The type of request that caused the exception</typeparam>
@@ -156,8 +156,8 @@
             </summary>
             <param name="request">The original request</param>
             <param name="exception">The caught exception</param>
-            <param name="state">State object — set <see cref="!:RequestExceptionHandlerState.Handled"/> 
-            and <see cref="!:RequestExceptionHandlerState.Response"/> to suppress the exception.</param>
+            <param name="state">State object — set <see cref="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Handled"/> 
+            and <see cref="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Response"/> to suppress the exception.</param>
             <param name="cancellationToken">Cancellation token</param>
         </member>
         <member name="T:SwiftMediator.Core.RequestExceptionHandlerState`1">

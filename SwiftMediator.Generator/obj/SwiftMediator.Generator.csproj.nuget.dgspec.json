@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Generator\\SwiftMediator.Generator.csproj": {
-      "version": "2026.4.2",
+      "version": "2026.4.3",
       "restore": {
         "projectUniqueName": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Generator\\SwiftMediator.Generator.csproj",
         "projectName": "SwiftMediator.Generator",
@@ -64,6 +64,11 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[4.8.0, )"
+            },
+            "Microsoft.SourceLink.GitHub": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",

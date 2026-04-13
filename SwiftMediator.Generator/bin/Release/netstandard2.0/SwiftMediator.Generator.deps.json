@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "SwiftMediator.Generator/2026.4.0": {
+      "SwiftMediator.Generator/2026.4.3": {
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp": "4.8.0"
         },
@@ -211,7 +211,7 @@
     }
   },
   "libraries": {
-    "SwiftMediator.Generator/2026.4.0": {
+    "SwiftMediator.Generator/2026.4.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

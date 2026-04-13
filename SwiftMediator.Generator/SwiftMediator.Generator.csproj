@@ -6,6 +6,7 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <Nullable>enable</Nullable>
     <LangVersion>11.0</LangVersion>
+    <IsPackable>false</IsPackable>
     <!-- Suppress CS1591: MediatorGenerator is an internal tool, not a public API library -->
     <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>

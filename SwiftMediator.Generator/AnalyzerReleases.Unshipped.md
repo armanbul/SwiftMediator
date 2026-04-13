@@ -1,1 +1,1 @@
-<!-- No unreleased rules. -->
+; No unreleased rules.

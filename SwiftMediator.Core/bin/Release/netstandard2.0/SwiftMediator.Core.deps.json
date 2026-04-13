@@ -7,11 +7,11 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "SwiftMediator.Core/2026.4.0": {
+      "SwiftMediator.Core/2026.4.3": {
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
-          "SwiftMediator.Contracts": "2026.4.0"
+          "SwiftMediator.Contracts": "2026.4.3"
         },
         "runtime": {
           "SwiftMediator.Core.dll": {}
@@ -44,7 +44,7 @@
         "runtime": {
           "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {
             "assemblyVersion": "4.0.4.1",
-            "fileVersion": "4.0.0.0"
+            "fileVersion": "4.6.28619.1"
           }
         }
       },
@@ -59,18 +59,18 @@
           }
         }
       },
-      "SwiftMediator.Contracts/2026.4.0": {
+      "SwiftMediator.Contracts/2026.4.3": {
         "runtime": {
           "SwiftMediator.Contracts.dll": {
-            "assemblyVersion": "2026.4.0.0",
-            "fileVersion": "2026.4.0.0"
+            "assemblyVersion": "2026.4.3.0",
+            "fileVersion": "2026.4.3.0"
           }
         }
       }
     }
   },
   "libraries": {
-    "SwiftMediator.Core/2026.4.0": {
+    "SwiftMediator.Core/2026.4.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -103,7 +103,7 @@
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
     },
-    "SwiftMediator.Contracts/2026.4.0": {
+    "SwiftMediator.Contracts/2026.4.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

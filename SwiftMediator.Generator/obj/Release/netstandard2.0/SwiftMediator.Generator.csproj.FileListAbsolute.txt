@@ -19,3 +19,14 @@ D:/Projects/Mediator/SwiftMediator.Generator/obj/Release/netstandard2.0/SwiftMed
 /home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Generator/obj/Release/netstandard2.0/SwiftMediator.Generator.dll
 /home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Generator/bin/Release/netstandard2.0/SwiftMediator.Generator.pdb
 /home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Generator/obj/Release/netstandard2.0/SwiftMediator.Generator.pdb
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\bin\Release\netstandard2.0\SwiftMediator.Generator.deps.json
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\bin\Release\netstandard2.0\SwiftMediator.Generator.dll
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\bin\Release\netstandard2.0\SwiftMediator.Generator.pdb
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\obj\Release\netstandard2.0\SwiftMediator.Generator.csproj.AssemblyReference.cache
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\obj\Release\netstandard2.0\SwiftMediator.Generator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\obj\Release\netstandard2.0\SwiftMediator.Generator.AssemblyInfoInputs.cache
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\obj\Release\netstandard2.0\SwiftMediator.Generator.AssemblyInfo.cs
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\obj\Release\netstandard2.0\SwiftMediator.Generator.csproj.CoreCompileInputs.cache
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\obj\Release\netstandard2.0\SwiftMediator.Generator.sourcelink.json
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\obj\Release\netstandard2.0\SwiftMediator.Generator.dll
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\obj\Release\netstandard2.0\SwiftMediator.Generator.pdb

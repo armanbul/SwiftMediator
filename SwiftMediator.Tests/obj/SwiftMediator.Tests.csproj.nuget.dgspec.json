@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Contracts\\SwiftMediator.Contracts.csproj": {
-      "version": "2026.4.2",
+      "version": "2026.4.3",
       "restore": {
         "projectUniqueName": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Contracts\\SwiftMediator.Contracts.csproj",
         "projectName": "SwiftMediator.Contracts",
@@ -55,6 +55,11 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "dependencies": {
+            "Microsoft.SourceLink.GitHub": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
@@ -78,7 +83,7 @@
       }
     },
     "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Core\\SwiftMediator.Core.csproj": {
-      "version": "2026.4.2",
+      "version": "2026.4.3",
       "restore": {
         "projectUniqueName": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Core\\SwiftMediator.Core.csproj",
         "projectName": "SwiftMediator",
@@ -169,6 +174,11 @@
               "target": "Package",
               "version": "[8.0.25, )",
               "autoReferenced": true
+            },
+            "Microsoft.SourceLink.GitHub": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -483,6 +493,11 @@
               "target": "Package",
               "version": "[10.0.5, )",
               "autoReferenced": true
+            },
+            "Microsoft.SourceLink.GitHub": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -793,6 +808,11 @@
               "target": "Package",
               "version": "[1.0.3, )",
               "autoReferenced": true
+            },
+            "Microsoft.SourceLink.GitHub": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201\\RuntimeIdentifierGraph.json"
@@ -805,6 +825,11 @@
               "version": "[8.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.SourceLink.GitHub": {
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.0, )"
             },
@@ -925,7 +950,7 @@
       }
     },
     "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Tests\\SwiftMediator.Tests.csproj": {
-      "version": "2026.4.2",
+      "version": "2026.4.3",
       "restore": {
         "projectUniqueName": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Tests\\SwiftMediator.Tests.csproj",
         "projectName": "SwiftMediator.Tests",
@@ -986,6 +1011,11 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.*, )"
+            },
+            "Microsoft.SourceLink.GitHub": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "xunit": {
               "target": "Package",

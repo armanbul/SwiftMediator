@@ -69,7 +69,7 @@ public sealed class MediatorServiceConfiguration
     /// Register an open generic pipeline behavior.
     /// Example: <c>cfg.AddOpenBehavior(typeof(LoggingBehavior&lt;,&gt;))</c>
     /// </summary>
-    public MediatorServiceConfiguration AddOpenBehavior(Type openBehaviorType, ServiceLifetime? lifetime = null)
+    public MediatorServiceConfiguration AddOpenBehavior([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type openBehaviorType, ServiceLifetime? lifetime = null)
     {
         ValidateOpenGeneric(openBehaviorType, typeof(IPipelineBehavior<,>), nameof(openBehaviorType));
         _pipelineRegistrations.Add(new PipelineRegistration(typeof(IPipelineBehavior<,>), openBehaviorType, lifetime));
@@ -93,7 +93,7 @@ public sealed class MediatorServiceConfiguration
     /// Register an open generic stream pipeline behavior.
     /// Example: <c>cfg.AddOpenStreamBehavior(typeof(StreamLoggingBehavior&lt;,&gt;))</c>
     /// </summary>
-    public MediatorServiceConfiguration AddOpenStreamBehavior(Type openBehaviorType, ServiceLifetime? lifetime = null)
+    public MediatorServiceConfiguration AddOpenStreamBehavior([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type openBehaviorType, ServiceLifetime? lifetime = null)
     {
         ValidateOpenGeneric(openBehaviorType, typeof(IStreamPipelineBehavior<,>), nameof(openBehaviorType));
         _pipelineRegistrations.Add(new PipelineRegistration(typeof(IStreamPipelineBehavior<,>), openBehaviorType, lifetime));
@@ -121,7 +121,7 @@ public sealed class MediatorServiceConfiguration
     }
 
     /// <summary>Register an open generic request pre-processor.</summary>
-    public MediatorServiceConfiguration AddOpenRequestPreProcessor(Type openType, ServiceLifetime? lifetime = null)
+    public MediatorServiceConfiguration AddOpenRequestPreProcessor([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type openType, ServiceLifetime? lifetime = null)
     {
         ValidateOpenGeneric(openType, typeof(IRequestPreProcessor<>), nameof(openType));
         _pipelineRegistrations.Add(new PipelineRegistration(typeof(IRequestPreProcessor<>), openType, lifetime));
@@ -136,7 +136,7 @@ public sealed class MediatorServiceConfiguration
     }
 
     /// <summary>Register an open generic request post-processor.</summary>
-    public MediatorServiceConfiguration AddOpenRequestPostProcessor(Type openType, ServiceLifetime? lifetime = null)
+    public MediatorServiceConfiguration AddOpenRequestPostProcessor([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type openType, ServiceLifetime? lifetime = null)
     {
         ValidateOpenGeneric(openType, typeof(IRequestPostProcessor<,>), nameof(openType));
         _pipelineRegistrations.Add(new PipelineRegistration(typeof(IRequestPostProcessor<,>), openType, lifetime));
@@ -248,6 +248,10 @@ public sealed class MediatorServiceConfiguration
 
     private void ScanAssembly(Assembly assembly, IServiceCollection services)
     {
+#pragma warning disable IL2026 // Assembly.GetTypes: suppressed because the calling Apply() is already [RequiresUnreferencedCode]
+#pragma warning disable IL2067 // DynamicallyAccessedMembers on type.GetInterfaces()
+#pragma warning disable IL2072 // DynamicallyAccessedMembers on ServiceDescriptor constructor
+#pragma warning disable IL2075 // DynamicallyAccessedMembers on GetInterfaces()
         Type[] types;
         try
         {
@@ -286,6 +290,10 @@ public sealed class MediatorServiceConfiguration
                 }
             }
         }
+#pragma warning restore IL2075
+#pragma warning restore IL2072
+#pragma warning restore IL2067
+#pragma warning restore IL2026
     }
 
     // ══════════════════════════════════════════════════════════════════

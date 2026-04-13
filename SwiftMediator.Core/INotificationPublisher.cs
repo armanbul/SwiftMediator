@@ -20,7 +20,7 @@ public interface INotificationPublisher
 /// Provides access to the handler instance for custom publisher implementations
 /// that may need to inspect, order, or filter handlers.
 /// </summary>
-public class NotificationHandlerExecutor
+public sealed class NotificationHandlerExecutor
 {
     /// <summary>
     /// The handler instance.
@@ -61,7 +61,7 @@ public class ForeachAwaitPublisher : INotificationPublisher
 }
 
 /// <summary>
-/// Notification publisher that awaits all handlers in parallel using <see cref="Task.WhenAll"/>.
+/// Notification publisher that awaits all handlers in parallel using <see cref="Task.WhenAll(System.Threading.Tasks.Task[])"/>.
 /// </summary>
 public class TaskWhenAllPublisher : INotificationPublisher
 {

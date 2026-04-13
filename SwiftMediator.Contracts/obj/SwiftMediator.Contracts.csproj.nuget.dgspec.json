@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Contracts\\SwiftMediator.Contracts.csproj": {
-      "version": "2026.4.2",
+      "version": "2026.4.3",
       "restore": {
         "projectUniqueName": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Contracts\\SwiftMediator.Contracts.csproj",
         "projectName": "SwiftMediator.Contracts",
@@ -55,6 +55,11 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "dependencies": {
+            "Microsoft.SourceLink.GitHub": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",

@@ -21,3 +21,16 @@ D:/Projects/Mediator/SwiftMediator.Contracts/obj/Release/netstandard2.0/SwiftMed
 /home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Contracts/obj/Release/netstandard2.0/SwiftMediator.Contracts.xml
 /home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Contracts/bin/Release/netstandard2.0/SwiftMediator.Contracts.pdb
 /home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Contracts/obj/Release/netstandard2.0/SwiftMediator.Contracts.pdb
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\bin\Release\netstandard2.0\SwiftMediator.Contracts.deps.json
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\bin\Release\netstandard2.0\SwiftMediator.Contracts.dll
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\bin\Release\netstandard2.0\SwiftMediator.Contracts.pdb
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\bin\Release\netstandard2.0\SwiftMediator.Contracts.xml
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\obj\Release\netstandard2.0\SwiftMediator.Contracts.csproj.AssemblyReference.cache
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\obj\Release\netstandard2.0\SwiftMediator.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\obj\Release\netstandard2.0\SwiftMediator.Contracts.AssemblyInfoInputs.cache
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\obj\Release\netstandard2.0\SwiftMediator.Contracts.AssemblyInfo.cs
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\obj\Release\netstandard2.0\SwiftMediator.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\obj\Release\netstandard2.0\SwiftMediator.Contracts.sourcelink.json
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\obj\Release\netstandard2.0\SwiftMediator.Contracts.dll
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\obj\Release\netstandard2.0\SwiftMediator.Contracts.xml
+C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\obj\Release\netstandard2.0\SwiftMediator.Contracts.pdb

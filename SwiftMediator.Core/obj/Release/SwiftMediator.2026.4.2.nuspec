@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SwiftMediator</id>
+    <version>2026.4.2</version>
+    <authors>Rev. Fr. Bedros Buldukian (Arman Buldukoglu)</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/DerBedros-Labs/SwiftMediator</projectUrl>
+    <description>High-performance, zero-allocation, source-generated mediator pattern library for .NET. Supports .NET 8+, .NET Standard 2.0, and .NET Framework 4.6.2+.</description>
+    <copyright>Copyright (c) 2026 Rev. Fr. Bedros Buldukian</copyright>
+    <tags>mediator mediatr source-generator performance aot</tags>
+    <repository type="git" url="https://github.com/DerBedros-Labs/SwiftMediator" commit="f76c147c49af8282c5c6656118684cce200ab312" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.2">
+        <dependency id="SwiftMediator.Contracts" version="2026.4.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Bcl.AsyncInterfaces" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net8.0">
+        <dependency id="SwiftMediator.Contracts" version="2026.4.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net10.0">
+        <dependency id="SwiftMediator.Contracts" version="2026.4.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="SwiftMediator.Contracts" version="2026.4.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Bcl.AsyncInterfaces" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Core\bin\Release\net10.0\SwiftMediator.Core.dll" target="lib\net10.0\SwiftMediator.Core.dll" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Core\bin\Release\net10.0\SwiftMediator.Core.xml" target="lib\net10.0\SwiftMediator.Core.xml" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Core\bin\Release\net462\SwiftMediator.Core.dll" target="lib\net462\SwiftMediator.Core.dll" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Core\bin\Release\net462\SwiftMediator.Core.xml" target="lib\net462\SwiftMediator.Core.xml" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Core\bin\Release\net8.0\SwiftMediator.Core.dll" target="lib\net8.0\SwiftMediator.Core.dll" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Core\bin\Release\net8.0\SwiftMediator.Core.xml" target="lib\net8.0\SwiftMediator.Core.xml" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Core\bin\Release\netstandard2.0\SwiftMediator.Core.dll" target="lib\netstandard2.0\SwiftMediator.Core.dll" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Core\bin\Release\netstandard2.0\SwiftMediator.Core.xml" target="lib\netstandard2.0\SwiftMediator.Core.xml" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Generator\bin\Release\netstandard2.0\SwiftMediator.Generator.dll" target="analyzers\dotnet\cs\SwiftMediator.Generator.dll" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\README.md" target="\README.md" />
+  </files>
+</package>
