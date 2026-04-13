@@ -1,0 +1,472 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwiftMediator.Core</name>
+    </assembly>
+    <members>
+        <member name="T:SwiftMediator.Core.IMediator">
+            <summary>
+            Defines a mediator to encapsulate request/response and publishing interaction patterns.
+            Combines <see cref="T:SwiftMediator.Core.ISender"/> and <see cref="T:SwiftMediator.Core.IPublisher"/> into a single interface.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.INotificationHandler`1">
+            <summary>
+            Defines a handler for a notification
+            </summary>
+            <typeparam name="TNotification">The type of notification being handled</typeparam>
+        </member>
+        <member name="M:SwiftMediator.Core.INotificationHandler`1.Handle(`0,System.Threading.CancellationToken)">
+            <summary>
+            Handles a notification
+            </summary>
+            <param name="notification">The notification</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A task representing the handling operation</returns>
+        </member>
+        <member name="T:SwiftMediator.Core.INotificationPublisher">
+            <summary>
+            Defines a custom strategy for publishing notifications to a set of handlers.
+            Register as a service to override the default notification dispatching behavior.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.INotificationPublisher.Publish(System.Collections.Generic.IEnumerable{SwiftMediator.Core.NotificationHandlerExecutor},SwiftMediator.Core.INotification,System.Threading.CancellationToken)">
+            <summary>
+            Publishes a notification to the given handlers.
+            </summary>
+            <param name="handlerExecutors">The set of handler executors to invoke</param>
+            <param name="notification">The notification to publish</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="T:SwiftMediator.Core.NotificationHandlerExecutor">
+            <summary>
+            Wraps a notification handler instance with its execution delegate.
+            Provides access to the handler instance for custom publisher implementations
+            that may need to inspect, order, or filter handlers.
+            </summary>
+        </member>
+        <member name="P:SwiftMediator.Core.NotificationHandlerExecutor.HandlerInstance">
+            <summary>
+            The handler instance.
+            </summary>
+        </member>
+        <member name="P:SwiftMediator.Core.NotificationHandlerExecutor.HandlerCallback">
+            <summary>
+            The delegate that invokes the handler.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.NotificationHandlerExecutor.#ctor(System.Object,System.Func{SwiftMediator.Core.INotification,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})">
+            <summary>
+            Initializes a new <see cref="T:SwiftMediator.Core.NotificationHandlerExecutor"/>.
+            </summary>
+            <param name="handlerInstance">The handler instance.</param>
+            <param name="handlerCallback">The delegate that invokes the handler.</param>
+        </member>
+        <member name="T:SwiftMediator.Core.ForeachAwaitPublisher">
+            <summary>
+            Default notification publisher that executes handlers sequentially (foreach-await).
+            This is the default when no custom <see cref="T:SwiftMediator.Core.INotificationPublisher"/> is registered.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.ForeachAwaitPublisher.Publish(System.Collections.Generic.IEnumerable{SwiftMediator.Core.NotificationHandlerExecutor},SwiftMediator.Core.INotification,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:SwiftMediator.Core.TaskWhenAllPublisher">
+            <summary>
+            Notification publisher that awaits all handlers in parallel using <see cref="M:System.Threading.Tasks.Task.WhenAll(System.Threading.Tasks.Task[])"/>.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.TaskWhenAllPublisher.Publish(System.Collections.Generic.IEnumerable{SwiftMediator.Core.NotificationHandlerExecutor},SwiftMediator.Core.INotification,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:SwiftMediator.Core.FireAndForgetPublisher">
+            <summary>
+            Notification publisher that fires all handlers in the background without waiting.
+            Exceptions are suppressed.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.FireAndForgetPublisher.Publish(System.Collections.Generic.IEnumerable{SwiftMediator.Core.NotificationHandlerExecutor},SwiftMediator.Core.INotification,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:SwiftMediator.Core.RequestHandlerDelegate`1">
+            <summary>
+            Represents an async continuation for the next task to execute in the pipeline
+            </summary>
+            <typeparam name="TResponse">Response type</typeparam>
+            <returns>Awaitable task returning the response</returns>
+        </member>
+        <member name="T:SwiftMediator.Core.IPipelineBehavior`2">
+            <summary>
+            Pipeline behavior to surround the inner handler.
+            </summary>
+            <typeparam name="TRequest">Request type</typeparam>
+            <typeparam name="TResponse">Response type</typeparam>
+        </member>
+        <member name="M:SwiftMediator.Core.IPipelineBehavior`2.Handle(`0,SwiftMediator.Core.RequestHandlerDelegate{`1},System.Threading.CancellationToken)">
+            <summary>
+            Pipeline handler. Perform any additional behavior and await the <paramref name="next"/> delegate as necessary
+            </summary>
+            <param name="request">Incoming request</param>
+            <param name="next">Awaitable delegate for the next action in the pipeline. Eventually this delegate represents the handler.</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Awaitable task returning the response</returns>
+        </member>
+        <member name="T:SwiftMediator.Core.IPublisher">
+            <summary>
+            Publish a notification event through the mediator to be handled by multiple handlers.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.IPublisher.PublishAsync``1(``0,SwiftMediator.Core.PublishStrategy,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously publish a notification to all registered handlers.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.IRequestExceptionAction`2">
+            <summary>
+            Defines an action to execute when an exception is thrown during request processing.
+            Unlike <see cref="T:SwiftMediator.Core.IRequestExceptionHandler`3"/>, actions
+            cannot handle (suppress) the exception — they only observe it (e.g., for logging or metrics).
+            All registered actions execute regardless of whether an exception handler subsequently handles the exception.
+            </summary>
+            <typeparam name="TRequest">The type of request that caused the exception</typeparam>
+            <typeparam name="TException">The type of exception to observe</typeparam>
+        </member>
+        <member name="M:SwiftMediator.Core.IRequestExceptionAction`2.Execute(`0,`1,System.Threading.CancellationToken)">
+            <summary>
+            Called when <typeparamref name="TException"/> is thrown while handling <typeparamref name="TRequest"/>.
+            </summary>
+            <param name="request">The original request</param>
+            <param name="exception">The caught exception</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="T:SwiftMediator.Core.IRequestExceptionHandler`3">
+            <summary>
+            Defines a handler for exceptions thrown during request processing.
+            Multiple exception handlers can be registered for the same request type;
+            they execute in registration order. Set <see cref="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Handled"/>
+            to stop propagation.
+            </summary>
+            <typeparam name="TRequest">The type of request that caused the exception</typeparam>
+            <typeparam name="TResponse">The response type of the request</typeparam>
+            <typeparam name="TException">The type of exception to handle</typeparam>
+        </member>
+        <member name="M:SwiftMediator.Core.IRequestExceptionHandler`3.Handle(`0,`2,SwiftMediator.Core.RequestExceptionHandlerState{`1},System.Threading.CancellationToken)">
+            <summary>
+            Called when <typeparamref name="TException"/> is thrown while handling <typeparamref name="TRequest"/>.
+            </summary>
+            <param name="request">The original request</param>
+            <param name="exception">The caught exception</param>
+            <param name="state">State object — set <see cref="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Handled"/> 
+            and <see cref="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Response"/> to suppress the exception.</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="T:SwiftMediator.Core.RequestExceptionHandlerState`1">
+            <summary>
+            Mutable state passed to <see cref="T:SwiftMediator.Core.IRequestExceptionHandler`3"/>.
+            Setting <see cref="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Handled"/> to true prevents the exception from being re-thrown.
+            </summary>
+            <typeparam name="TResponse">The response type</typeparam>
+        </member>
+        <member name="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Handled">
+            <summary>
+            When set to true, the exception is considered handled and will not be re-thrown.
+            The <see cref="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Response"/> value will be returned to the caller instead.
+            </summary>
+        </member>
+        <member name="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Response">
+            <summary>
+            The fallback response to return when <see cref="P:SwiftMediator.Core.RequestExceptionHandlerState`1.Handled"/> is true.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.RequestExceptionHandlerState`1.SetHandled(`0)">
+            <summary>
+            Marks the exception as handled and provides a fallback response.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.IRequestHandler`2">
+            <summary>
+            Defines a handler for a request
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+        </member>
+        <member name="M:SwiftMediator.Core.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)">
+            <summary>
+            Handles a request
+            </summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Response from the request</returns>
+        </member>
+        <member name="T:SwiftMediator.Core.IRequestHandler`1">
+            <summary>
+            Defines a handler for a request with a void (Unit) response.
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+        </member>
+        <member name="T:SwiftMediator.Core.IRequestPreProcessor`1">
+            <summary>
+            Executed before the request handler (but after pipeline behaviors).
+            Useful for logging, validation setup, or enriching the request context.
+            Multiple pre-processors can be registered; they run in registration order.
+            </summary>
+            <typeparam name="TRequest">The type of request being processed</typeparam>
+        </member>
+        <member name="M:SwiftMediator.Core.IRequestPreProcessor`1.Process(`0,System.Threading.CancellationToken)">
+            <summary>
+            Process method executed before the request handler.
+            </summary>
+            <param name="request">The incoming request</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="T:SwiftMediator.Core.IRequestPostProcessor`2">
+            <summary>
+            Executed after the request handler completes successfully (but before pipeline behaviors return).
+            Useful for audit logging, cache population, or response enrichment.
+            Multiple post-processors can be registered; they run in registration order.
+            </summary>
+            <typeparam name="TRequest">The type of request being processed</typeparam>
+            <typeparam name="TResponse">The response type</typeparam>
+        </member>
+        <member name="M:SwiftMediator.Core.IRequestPostProcessor`2.Process(`0,`1,System.Threading.CancellationToken)">
+            <summary>
+            Process method executed after the request handler.
+            </summary>
+            <param name="request">The original request</param>
+            <param name="response">The response returned by the handler</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="T:SwiftMediator.Core.ISender">
+            <summary>
+            Send a request through the mediator pipeline to be handled by a single handler.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.ISender.SendAsync``2(``0,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously send a request to a single handler using JIT optimized generics.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.ISender.SendAsync(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously send a request to a single handler using dynamic dispatch (object-based).
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.ISender.CreateStream``2(``0,System.Threading.CancellationToken)">
+            <summary>
+            Creates an async enumerable stream from a streaming request handler.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.StreamHandlerDelegate`1">
+            <summary>
+            Represents an async continuation for the next task to execute in the stream pipeline.
+            </summary>
+            <typeparam name="TResponse">Streamed item type</typeparam>
+            <returns>An async enumerable of response items</returns>
+        </member>
+        <member name="T:SwiftMediator.Core.IStreamPipelineBehavior`2">
+            <summary>
+            Pipeline behavior to surround the inner stream handler.
+            Works like <see cref="T:SwiftMediator.Core.IPipelineBehavior`2"/> but for streaming requests.
+            </summary>
+            <typeparam name="TRequest">Stream request type</typeparam>
+            <typeparam name="TResponse">Streamed item type</typeparam>
+        </member>
+        <member name="M:SwiftMediator.Core.IStreamPipelineBehavior`2.Handle(`0,SwiftMediator.Core.StreamHandlerDelegate{`1},System.Threading.CancellationToken)">
+            <summary>
+            Stream pipeline handler. Perform any additional behavior and return the <paramref name="next"/> delegate's result.
+            You may wrap, filter, or transform the stream.
+            </summary>
+            <param name="request">Incoming stream request</param>
+            <param name="next">Delegate for the next action in the pipeline (eventually the handler)</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>An async enumerable of response items</returns>
+        </member>
+        <member name="T:SwiftMediator.Core.IStreamRequestHandler`2">
+            <summary>
+            Defines a handler for a streaming request that yields items via <see cref="T:System.Collections.Generic.IAsyncEnumerable`1"/>.
+            </summary>
+            <typeparam name="TRequest">The type of streaming request being handled</typeparam>
+            <typeparam name="TResponse">The type of each streamed response item</typeparam>
+        </member>
+        <member name="M:SwiftMediator.Core.IStreamRequestHandler`2.Handle(`0,System.Threading.CancellationToken)">
+            <summary>
+            Handles a streaming request
+            </summary>
+            <param name="request">The streaming request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>An async enumerable of response items</returns>
+        </member>
+        <member name="T:SwiftMediator.Core.MediatorExtensions">
+            <summary>
+            Convenience extension methods for <see cref="T:SwiftMediator.Core.IMediator"/>.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorExtensions.SendAsync``1(SwiftMediator.Core.ISender,``0,System.Threading.CancellationToken)">
+            <summary>
+            Send a void (Unit) request without needing to specify the Unit response type.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.MediatorServiceConfiguration">
+            <summary>
+            Fluent configuration for SwiftMediator DI registration.
+            Supports assembly scanning, explicit pipeline registrations, and lifetime configuration.
+            </summary>
+        </member>
+        <member name="P:SwiftMediator.Core.MediatorServiceConfiguration.Lifetime">
+            <summary>
+            The <see cref="T:SwiftMediator.Core.HandlerLifetime"/> for all request, notification, and stream handlers.
+            Defaults to <see cref="F:SwiftMediator.Core.HandlerLifetime.Transient"/>.
+            </summary>
+        </member>
+        <member name="P:SwiftMediator.Core.MediatorServiceConfiguration.MediatorLifetime">
+            <summary>
+            The <see cref="T:SwiftMediator.Core.HandlerLifetime"/> for the <see cref="T:SwiftMediator.Core.IMediator"/> registration itself.
+            Defaults to <see cref="F:SwiftMediator.Core.HandlerLifetime.Scoped"/>.
+            </summary>
+        </member>
+        <member name="P:SwiftMediator.Core.MediatorServiceConfiguration.NotificationPublisherType">
+            <summary>
+            Optional: set a custom <see cref="T:SwiftMediator.Core.INotificationPublisher"/> type.
+            When set, all notification publishes will delegate to this publisher.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.RegisterServicesFromAssembly(System.Reflection.Assembly)">
+            <summary>
+            Scan the given assembly for pipeline behaviors, pre/post processors,
+            exception handlers, and exception actions. Registers them automatically.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.RegisterServicesFromAssemblyContaining``1">
+            <summary>
+            Scan the assembly containing <typeparamref name="T"/> for pipeline services.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.RegisterServicesFromAssemblyContaining(System.Type)">
+            <summary>
+            Scan the assembly containing <paramref name="type"/> for pipeline services.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddOpenBehavior(System.Type,System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>
+            Register an open generic pipeline behavior.
+            Example: <c>cfg.AddOpenBehavior(typeof(LoggingBehavior&lt;,&gt;))</c>
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddBehavior``1(System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>
+            Register a closed pipeline behavior by its concrete type.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddOpenStreamBehavior(System.Type,System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>
+            Register an open generic stream pipeline behavior.
+            Example: <c>cfg.AddOpenStreamBehavior(typeof(StreamLoggingBehavior&lt;,&gt;))</c>
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddStreamBehavior``1(System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>
+            Register a closed stream pipeline behavior by its concrete type.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddRequestPreProcessor``1(System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>Register a closed request pre-processor.</summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddOpenRequestPreProcessor(System.Type,System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>Register an open generic request pre-processor.</summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddRequestPostProcessor``1(System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>Register a closed request post-processor.</summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddOpenRequestPostProcessor(System.Type,System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>Register an open generic request post-processor.</summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddExceptionHandler``1(System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>Register a closed exception handler.</summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.AddExceptionAction``1(System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>Register a closed exception action.</summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.SetNotificationPublisher``1">
+            <summary>
+            Set a custom notification publisher. When registered, the mediator delegates
+            all notification publishes to this publisher instead of the built-in strategies.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.RegisterMediator``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers the mediator implementation along with ISender and IPublisher
+            forwarding services. Called by the source-generated AddSwiftMediator method.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.RegisterHandler(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type)">
+            <summary>
+            Registers a concrete handler type with the configured handler lifetime.
+            Called by the source-generated AddSwiftMediator method.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.RegisterOpenGenericHandler(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type)">
+            <summary>
+            Registers an open generic handler with the configured handler lifetime.
+            Called by the source-generated AddSwiftMediator method.
+            </summary>
+        </member>
+        <member name="M:SwiftMediator.Core.MediatorServiceConfiguration.Apply(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Applies all fluent registrations and assembly scanning results to the service collection.
+            Called by the source-generated AddSwiftMediator method as the final step.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.PublishStrategy">
+            <summary>
+            Defines the strategy for executing multiple notification handlers.
+            </summary>
+        </member>
+        <member name="F:SwiftMediator.Core.PublishStrategy.Sequential">
+            <summary>
+            Executes all handlers sequentially. Default behavior.
+            </summary>
+        </member>
+        <member name="F:SwiftMediator.Core.PublishStrategy.Parallel">
+            <summary>
+            Executes all handlers in parallel using Task.WhenAll.
+            </summary>
+        </member>
+        <member name="F:SwiftMediator.Core.PublishStrategy.FireAndForget">
+            <summary>
+            Starts all handlers in parallel but does not wait for their completion.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.SwiftMediatorOptions">
+            <summary>
+            Configuration options for <c>AddSwiftMediator</c>.
+            Allows customizing handler registration lifetimes.
+            </summary>
+        </member>
+        <member name="P:SwiftMediator.Core.SwiftMediatorOptions.Lifetime">
+            <summary>
+            The <see cref="T:SwiftMediator.Core.HandlerLifetime"/> for all request, notification, and stream handlers.
+            Defaults to <see cref="F:SwiftMediator.Core.HandlerLifetime.Transient"/>.
+            </summary>
+        </member>
+        <member name="P:SwiftMediator.Core.SwiftMediatorOptions.MediatorLifetime">
+            <summary>
+            The <see cref="T:SwiftMediator.Core.HandlerLifetime"/> for the <see cref="T:SwiftMediator.Core.IMediator"/> registration itself.
+            Defaults to <see cref="F:SwiftMediator.Core.HandlerLifetime.Scoped"/>.
+            </summary>
+        </member>
+        <member name="T:SwiftMediator.Core.HandlerLifetime">
+            <summary>
+            Specifies the DI registration lifetime for handlers and the mediator.
+            </summary>
+        </member>
+        <member name="F:SwiftMediator.Core.HandlerLifetime.Transient">
+            <summary>A new instance is created each time it is requested.</summary>
+        </member>
+        <member name="F:SwiftMediator.Core.HandlerLifetime.Scoped">
+            <summary>A single instance is created per scope (e.g. per HTTP request).</summary>
+        </member>
+        <member name="F:SwiftMediator.Core.HandlerLifetime.Singleton">
+            <summary>A single instance is shared across the entire application.</summary>
+        </member>
+    </members>
+</doc>

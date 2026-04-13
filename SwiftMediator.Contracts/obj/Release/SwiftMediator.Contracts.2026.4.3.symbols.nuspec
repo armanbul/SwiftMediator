@@ -11,12 +11,12 @@
     <description>Contracts-only package for SwiftMediator. Contains marker interfaces (IRequest, INotification, IStreamRequest) for use in shared/API projects without pulling in the full mediator implementation.</description>
     <copyright>Copyright (c) 2026 Rev. Fr. Bedros Buldukian</copyright>
     <tags>mediator contracts cqrs source-generator</tags>
-    <repository type="git" url="https://github.com/DerBedros-Labs/SwiftMediator" commit="f76c147c49af8282c5c6656118684cce200ab312" />
+    <repository type="git" url="https://github.com/DerBedros-Labs/SwiftMediator" commit="9c1b20ff5cee0ab5dee212e0830945cc06ad5961" />
     <dependencies>
       <group targetFramework=".NETStandard2.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Contracts\bin\Release\netstandard2.0\SwiftMediator.Contracts.pdb" target="lib\netstandard2.0\SwiftMediator.Contracts.pdb" />
+    <file src="C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\benchmarks\SwiftMediator.Benchmarks\bin\Release\net10.0\586fcc4e-8831-4e87-8480-91b7fdad3d23\bin\Release\net10.0\SwiftMediator.Contracts.pdb" target="lib\netstandard2.0\SwiftMediator.Contracts.pdb" />
   </files>
 </package>

@@ -360,27 +360,51 @@ public class MediatorGenerator : IIncrementalGenerator
         sb.AppendLine("    }");
         sb.AppendLine();
 
-        // Per-request SendTyped methods with Pre/Post processors, Exception handlers + Exception actions
+        // Per-request SendTyped methods — non-async fast path + async full pipeline
         foreach (var handler in requestHandlers)
         {
             var safeName = SanitizeName(handler.RequestType);
-            sb.AppendLine($"    private async ValueTask<TResponse> SendTyped_{safeName}<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken)");
+
+            // ── Fast-path method (non-async, zero state-machine allocation) ──
+            sb.AppendLine($"    [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            sb.AppendLine($"    private ValueTask<TResponse> SendTyped_{safeName}<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken)");
             sb.AppendLine("        where TRequest : IRequest<TResponse>");
             sb.AppendLine("    {");
             sb.AppendLine($"        var handler = _serviceProvider.GetRequiredService<{handler.HandlerType}>();");
             sb.AppendLine($"        var typed = ({handler.RequestType})(object)request!;");
             sb.AppendLine();
+            sb.AppendLine("        // Fast-path: skip full pipeline when no behaviors, pre/post-processors registered");
+            sb.AppendLine("        if (_serviceProvider.GetService<IPipelineBehavior<TRequest, TResponse>>() == null");
+            sb.AppendLine($"            && _serviceProvider.GetService<IRequestPreProcessor<{handler.RequestType}>>() == null");
+            sb.AppendLine($"            && _serviceProvider.GetService<IRequestPostProcessor<{handler.RequestType}, {handler.ResponseType}>>() == null)");
+            sb.AppendLine("        {");
+            sb.AppendLine("            try");
+            sb.AppendLine("            {");
+            sb.AppendLine("                var result = handler.Handle(typed, cancellationToken);");
+            sb.AppendLine("                if (result.IsCompletedSuccessfully)");
+            sb.AppendLine("                    return new ValueTask<TResponse>((TResponse)(object)result.Result!);");
+            sb.AppendLine($"                return AwaitHandlerResult<TResponse, {handler.ResponseType}>(result);");
+            sb.AppendLine("            }");
+            sb.AppendLine("            catch (Exception ex)");
+            sb.AppendLine("            {");
+            sb.AppendLine($"                return HandleExceptionAsync_{safeName}<TRequest, TResponse>(typed, ex, cancellationToken);");
+            sb.AppendLine("            }");
+            sb.AppendLine("        }");
+            sb.AppendLine();
+            sb.AppendLine($"        return SendTyped_{safeName}_Full<TRequest, TResponse>(handler, typed, request, cancellationToken);");
+            sb.AppendLine("    }");
+            sb.AppendLine();
 
-            // Pre-processors
+            // ── Full pipeline method (async) ──
+            sb.AppendLine($"    private async ValueTask<TResponse> SendTyped_{safeName}_Full<TRequest, TResponse>({handler.HandlerType} handler, {handler.RequestType} typed, TRequest request, CancellationToken cancellationToken)");
+            sb.AppendLine("        where TRequest : IRequest<TResponse>");
+            sb.AppendLine("    {");
             sb.AppendLine($"        foreach (var pre in _serviceProvider.GetServices<IRequestPreProcessor<{handler.RequestType}>>())");
             sb.AppendLine("            await pre.Process(typed, cancellationToken).ConfigureAwait(false);");
             sb.AppendLine();
-
-            // Pipeline with fast-path
             sb.AppendLine("        var behaviors = _serviceProvider.GetServices<IPipelineBehavior<TRequest, TResponse>>();");
             sb.AppendLine("        using var enumerator = behaviors.GetEnumerator();");
             sb.AppendLine();
-
             sb.AppendLine("        try");
             sb.AppendLine("        {");
             sb.AppendLine("            TResponse response;");
@@ -407,22 +431,16 @@ public class MediatorGenerator : IIncrementalGenerator
             sb.AppendLine("                response = await next().ConfigureAwait(false);");
             sb.AppendLine("            }");
             sb.AppendLine();
-
-            // Post-processors
             sb.AppendLine($"            foreach (var post in _serviceProvider.GetServices<IRequestPostProcessor<{handler.RequestType}, {handler.ResponseType}>>())");
             sb.AppendLine($"                await post.Process(typed, ({handler.ResponseType})(object)response!, cancellationToken).ConfigureAwait(false);");
             sb.AppendLine();
             sb.AppendLine("            return response;");
             sb.AppendLine("        }");
-
-            // Exception handling: actions first, then handlers
             sb.AppendLine("        catch (Exception ex)");
             sb.AppendLine("        {");
-            // #1: Exception Actions — always run, cannot suppress
             sb.AppendLine($"            foreach (var action in _serviceProvider.GetServices<IRequestExceptionAction<{handler.RequestType}, Exception>>())");
             sb.AppendLine("                await action.Execute(typed, ex, cancellationToken).ConfigureAwait(false);");
             sb.AppendLine();
-            // Exception Handlers — can suppress
             sb.AppendLine($"            var exceptionHandlers = _serviceProvider.GetServices<IRequestExceptionHandler<{handler.RequestType}, {handler.ResponseType}, Exception>>();");
             sb.AppendLine($"            var state = new RequestExceptionHandlerState<{handler.ResponseType}>();");
             sb.AppendLine("            foreach (var exHandler in exceptionHandlers)");
@@ -433,7 +451,26 @@ public class MediatorGenerator : IIncrementalGenerator
             sb.AppendLine("            }");
             sb.AppendLine("            throw;");
             sb.AppendLine("        }");
+            sb.AppendLine("    }");
+            sb.AppendLine();
 
+            // ── Exception handler for fast path (preserves stack trace via ExceptionDispatchInfo) ──
+            sb.AppendLine($"    private async ValueTask<TResponse> HandleExceptionAsync_{safeName}<TRequest, TResponse>({handler.RequestType} typed, Exception ex, CancellationToken cancellationToken)");
+            sb.AppendLine("        where TRequest : IRequest<TResponse>");
+            sb.AppendLine("    {");
+            sb.AppendLine($"        foreach (var action in _serviceProvider.GetServices<IRequestExceptionAction<{handler.RequestType}, Exception>>())");
+            sb.AppendLine("            await action.Execute(typed, ex, cancellationToken).ConfigureAwait(false);");
+            sb.AppendLine();
+            sb.AppendLine($"        var exceptionHandlers = _serviceProvider.GetServices<IRequestExceptionHandler<{handler.RequestType}, {handler.ResponseType}, Exception>>();");
+            sb.AppendLine($"        var state = new RequestExceptionHandlerState<{handler.ResponseType}>();");
+            sb.AppendLine("        foreach (var exHandler in exceptionHandlers)");
+            sb.AppendLine("        {");
+            sb.AppendLine("            await exHandler.Handle(typed, ex, state, cancellationToken).ConfigureAwait(false);");
+            sb.AppendLine("            if (state.Handled)");
+            sb.AppendLine("                return (TResponse)(object)state.Response!;");
+            sb.AppendLine("        }");
+            sb.AppendLine("        System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex).Throw();");
+            sb.AppendLine("        return default!; // unreachable");
             sb.AppendLine("    }");
             sb.AppendLine();
         }
@@ -441,14 +478,19 @@ public class MediatorGenerator : IIncrementalGenerator
         // ════════════════════════════════════════════════════════════════
         // 2. SendAsync(object) — Dynamic dispatch
         // ════════════════════════════════════════════════════════════════
-        sb.AppendLine("    public async ValueTask<object?> SendAsync(object request, CancellationToken cancellationToken = default)");
+        sb.AppendLine("    public ValueTask<object?> SendAsync(object request, CancellationToken cancellationToken = default)");
         sb.AppendLine("    {");
         sb.AppendLine("        switch (request)");
         sb.AppendLine("        {");
         foreach (var handler in requestHandlers)
         {
             sb.AppendLine($"            case {handler.RequestType} req:");
-            sb.AppendLine($"                return await SendAsync<{handler.RequestType}, {handler.ResponseType}>(req, cancellationToken).ConfigureAwait(false);");
+            sb.AppendLine("            {");
+            sb.AppendLine($"                var task = SendAsync<{handler.RequestType}, {handler.ResponseType}>(req, cancellationToken);");
+            sb.AppendLine("                if (task.IsCompletedSuccessfully)");
+            sb.AppendLine("                    return new ValueTask<object?>(task.Result);");
+            sb.AppendLine("                return AwaitDynamicSend(task);");
+            sb.AppendLine("            }");
         }
         sb.AppendLine("            default:");
         sb.AppendLine("                throw new InvalidOperationException($\"No handler registered for type {request.GetType().Name}\");");
@@ -459,7 +501,7 @@ public class MediatorGenerator : IIncrementalGenerator
         // ════════════════════════════════════════════════════════════════
         // 3. PublishAsync — polymorphic notification dispatch
         // ════════════════════════════════════════════════════════════════
-        sb.AppendLine("    public async ValueTask PublishAsync<TNotification>(TNotification notification, PublishStrategy strategy = PublishStrategy.Sequential, CancellationToken cancellationToken = default)");
+        sb.AppendLine("    public ValueTask PublishAsync<TNotification>(TNotification notification, PublishStrategy strategy = PublishStrategy.Sequential, CancellationToken cancellationToken = default)");
         sb.AppendLine("        where TNotification : INotification");
         sb.AppendLine("    {");
         sb.AppendLine("        var executors = new List<NotificationHandlerExecutor>();");
@@ -482,33 +524,24 @@ public class MediatorGenerator : IIncrementalGenerator
             sb.AppendLine();
         }
 
-        sb.AppendLine("        if (executors.Count == 0) return;");
+        sb.AppendLine("        if (executors.Count == 0) return default;");
         sb.AppendLine();
         sb.AppendLine("        var customPublisher = _serviceProvider.GetService<INotificationPublisher>();");
         sb.AppendLine("        if (customPublisher != null)");
+        sb.AppendLine("            return customPublisher.Publish(executors, notification!, cancellationToken);");
+        sb.AppendLine();
+        sb.AppendLine("        if (strategy == PublishStrategy.Sequential)");
         sb.AppendLine("        {");
-        sb.AppendLine("            await customPublisher.Publish(executors, notification!, cancellationToken).ConfigureAwait(false);");
-        sb.AppendLine("            return;");
+        sb.AppendLine("            for (int i = 0; i < executors.Count; i++)");
+        sb.AppendLine("            {");
+        sb.AppendLine("                var task = executors[i].HandlerCallback(notification!, cancellationToken);");
+        sb.AppendLine("                if (!task.IsCompletedSuccessfully)");
+        sb.AppendLine("                    return AwaitSequentialPublish(executors, notification!, i, task, cancellationToken);");
+        sb.AppendLine("            }");
+        sb.AppendLine("            return default;");
         sb.AppendLine("        }");
         sb.AppendLine();
-        sb.AppendLine("        switch (strategy)");
-        sb.AppendLine("        {");
-        sb.AppendLine("            case PublishStrategy.Sequential:");
-        sb.AppendLine("                foreach (var executor in executors)");
-        sb.AppendLine("                    await executor.HandlerCallback(notification!, cancellationToken).ConfigureAwait(false);");
-        sb.AppendLine("                break;");
-        sb.AppendLine("            case PublishStrategy.Parallel:");
-        sb.AppendLine("                var tasks = new Task[executors.Count];");
-        sb.AppendLine("                for (int i = 0; i < executors.Count; i++)");
-        sb.AppendLine("                    tasks[i] = executors[i].HandlerCallback(notification!, cancellationToken).AsTask();");
-        sb.AppendLine("                await Task.WhenAll(tasks).ConfigureAwait(false);");
-        sb.AppendLine("                break;");
-        sb.AppendLine("            case PublishStrategy.FireAndForget:");
-        sb.AppendLine("                foreach (var executor in executors)");
-        sb.AppendLine("                    try { _ = SafeFireAndForget(executor.HandlerCallback(notification!, cancellationToken)); }");
-        sb.AppendLine("                    catch (Exception) { /* Synchronous throw suppressed */ }");
-        sb.AppendLine("                break;");
-        sb.AppendLine("        }");
+        sb.AppendLine("        return PublishNonSequentialAsync(executors, notification!, strategy, cancellationToken);");
         sb.AppendLine("    }");
         sb.AppendLine();
 
@@ -527,12 +560,15 @@ public class MediatorGenerator : IIncrementalGenerator
             sb.AppendLine();
             // #2: Stream pipeline behaviors
             sb.AppendLine($"            var streamBehaviors = _serviceProvider.GetServices<IStreamPipelineBehavior<{handler.RequestType}, {handler.ResponseType}>>();");
-            sb.AppendLine("            var behaviorList = streamBehaviors.ToList();");
+            sb.AppendLine("            using var behaviorEnum = streamBehaviors.GetEnumerator();");
             sb.AppendLine();
-            sb.AppendLine("            if (behaviorList.Count == 0)");
+            sb.AppendLine("            if (!behaviorEnum.MoveNext())");
             sb.AppendLine("            {");
             sb.AppendLine($"                return (IAsyncEnumerable<TResponse>)handler.Handle(typed, cancellationToken);");
             sb.AppendLine("            }");
+            sb.AppendLine();
+            sb.AppendLine($"            var behaviorList = new List<IStreamPipelineBehavior<{handler.RequestType}, {handler.ResponseType}>>();");
+            sb.AppendLine("            do { behaviorList.Add(behaviorEnum.Current); } while (behaviorEnum.MoveNext());");
             sb.AppendLine();
             sb.AppendLine($"            StreamHandlerDelegate<{handler.ResponseType}> next = () => handler.Handle(typed, cancellationToken);");
             sb.AppendLine("            for (int i = behaviorList.Count - 1; i >= 0; i--)");
@@ -549,6 +585,43 @@ public class MediatorGenerator : IIncrementalGenerator
         sb.AppendLine();
 
         // Helpers
+        sb.AppendLine("    private static async ValueTask<TResponse> AwaitHandlerResult<TResponse, TActual>(ValueTask<TActual> task)");
+        sb.AppendLine("    {");
+        sb.AppendLine("        return (TResponse)(object)(await task.ConfigureAwait(false))!;");
+        sb.AppendLine("    }");
+        sb.AppendLine();
+        sb.AppendLine("    private static async ValueTask<object?> AwaitDynamicSend<T>(ValueTask<T> task)");
+        sb.AppendLine("    {");
+        sb.AppendLine("        return await task.ConfigureAwait(false);");
+        sb.AppendLine("    }");
+        sb.AppendLine();
+        sb.AppendLine("    private static async ValueTask AwaitSequentialPublish<TNotification>(List<NotificationHandlerExecutor> executors, TNotification notification, int index, ValueTask current, CancellationToken cancellationToken)");
+        sb.AppendLine("        where TNotification : INotification");
+        sb.AppendLine("    {");
+        sb.AppendLine("        await current.ConfigureAwait(false);");
+        sb.AppendLine("        for (int i = index + 1; i < executors.Count; i++)");
+        sb.AppendLine("            await executors[i].HandlerCallback(notification!, cancellationToken).ConfigureAwait(false);");
+        sb.AppendLine("    }");
+        sb.AppendLine();
+        sb.AppendLine("    private static async ValueTask PublishNonSequentialAsync<TNotification>(List<NotificationHandlerExecutor> executors, TNotification notification, PublishStrategy strategy, CancellationToken cancellationToken)");
+        sb.AppendLine("        where TNotification : INotification");
+        sb.AppendLine("    {");
+        sb.AppendLine("        switch (strategy)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            case PublishStrategy.Parallel:");
+        sb.AppendLine("                var tasks = new Task[executors.Count];");
+        sb.AppendLine("                for (int i = 0; i < executors.Count; i++)");
+        sb.AppendLine("                    tasks[i] = executors[i].HandlerCallback(notification!, cancellationToken).AsTask();");
+        sb.AppendLine("                await Task.WhenAll(tasks).ConfigureAwait(false);");
+        sb.AppendLine("                break;");
+        sb.AppendLine("            case PublishStrategy.FireAndForget:");
+        sb.AppendLine("                foreach (var executor in executors)");
+        sb.AppendLine("                    try { _ = SafeFireAndForget(executor.HandlerCallback(notification!, cancellationToken)); }");
+        sb.AppendLine("                    catch (Exception) { /* Synchronous throw suppressed */ }");
+        sb.AppendLine("                break;");
+        sb.AppendLine("        }");
+        sb.AppendLine("    }");
+        sb.AppendLine();
         sb.AppendLine("    private static async Task SafeFireAndForget(ValueTask task)");
         sb.AppendLine("    {");
         sb.AppendLine("        try { await task.ConfigureAwait(false); }");

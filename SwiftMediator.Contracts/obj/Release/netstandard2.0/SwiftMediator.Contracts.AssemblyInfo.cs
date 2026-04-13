@@ -17,7 +17,7 @@ using System.Reflection;
     "Notification, IStreamRequest) for use in shared/API projects without pulling in " +
     "the full mediator implementation."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("2026.4.3.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2026.4.3+f76c147c49af8282c5c6656118684cce200ab312")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2026.4.3+9c1b20ff5cee0ab5dee212e0830945cc06ad5961")]
 [assembly: System.Reflection.AssemblyProductAttribute("SwiftMediator.Contracts")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SwiftMediator.Contracts")]
 [assembly: System.Reflection.AssemblyVersionAttribute("2026.4.3.0")]

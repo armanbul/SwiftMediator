@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("High-performance, zero-allocation, source-generated mediator pattern library for " +
     ".NET. Supports .NET 8+, .NET Standard 2.0, and .NET Framework 4.6.2+."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("2026.4.3.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2026.4.3+f76c147c49af8282c5c6656118684cce200ab312")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2026.4.3+9c1b20ff5cee0ab5dee212e0830945cc06ad5961")]
 [assembly: System.Reflection.AssemblyProductAttribute("SwiftMediator.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SwiftMediator.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("2026.4.3.0")]

@@ -11,7 +11,7 @@
     <description>High-performance, zero-allocation, source-generated mediator pattern library for .NET. Supports .NET 8+, .NET Standard 2.0, and .NET Framework 4.6.2+.</description>
     <copyright>Copyright (c) 2026 Rev. Fr. Bedros Buldukian</copyright>
     <tags>mediator mediatr source-generator performance aot</tags>
-    <repository type="git" url="https://github.com/DerBedros-Labs/SwiftMediator" commit="f76c147c49af8282c5c6656118684cce200ab312" />
+    <repository type="git" url="https://github.com/DerBedros-Labs/SwiftMediator" commit="9c1b20ff5cee0ab5dee212e0830945cc06ad5961" />
     <dependencies>
       <group targetFramework=".NETFramework4.6.2">
         <dependency id="SwiftMediator.Contracts" version="2026.4.3" exclude="Build,Analyzers" />
