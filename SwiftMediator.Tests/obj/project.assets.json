@@ -423,12 +423,12 @@
           "build/net6.0/xunit.runner.visualstudio.props": {}
         }
       },
-      "SwiftMediator/2026.4.0": {
+      "SwiftMediator/2026.4.2": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
-          "SwiftMediator.Contracts": "2026.4.0"
+          "SwiftMediator.Contracts": "2026.4.2"
         },
         "compile": {
           "bin/placeholder/SwiftMediator.dll": {}
@@ -437,7 +437,7 @@
           "bin/placeholder/SwiftMediator.dll": {}
         }
       },
-      "SwiftMediator.Contracts/2026.4.0": {
+      "SwiftMediator.Contracts/2026.4.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "compile": {
@@ -951,12 +951,12 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "SwiftMediator/2026.4.0": {
+    "SwiftMediator/2026.4.2": {
       "type": "project",
       "path": "../SwiftMediator.Core/SwiftMediator.Core.csproj",
       "msbuildProject": "../SwiftMediator.Core/SwiftMediator.Core.csproj"
     },
-    "SwiftMediator.Contracts/2026.4.0": {
+    "SwiftMediator.Contracts/2026.4.2": {
       "type": "project",
       "path": "../SwiftMediator.Contracts/SwiftMediator.Contracts.csproj",
       "msbuildProject": "../SwiftMediator.Contracts/SwiftMediator.Contracts.csproj"
@@ -966,38 +966,51 @@
     "net10.0": [
       "Microsoft.Extensions.DependencyInjection >= 9.0.0",
       "Microsoft.NET.Test.Sdk >= 17.*",
-      "SwiftMediator >= 2026.4.0",
+      "SwiftMediator >= 2026.4.2",
       "xunit >= 2.*",
       "xunit.runner.visualstudio >= 2.*"
     ]
   },
   "packageFolders": {
-    "/home/runner/.nuget/packages/": {}
+    "C:\\Users\\arman\\.nuget\\packages\\": {},
+    "C:\\Program Files\\DevExpress 25.2\\Components\\Offline Packages": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "2026.4.0",
+    "version": "2026.4.2",
     "restore": {
-      "projectUniqueName": "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Tests/SwiftMediator.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Tests\\SwiftMediator.Tests.csproj",
       "projectName": "SwiftMediator.Tests",
-      "projectPath": "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Tests/SwiftMediator.Tests.csproj",
-      "packagesPath": "/home/runner/.nuget/packages/",
-      "outputPath": "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Tests/obj/",
+      "projectPath": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Tests\\SwiftMediator.Tests.csproj",
+      "packagesPath": "C:\\Users\\arman\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Tests\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\DevExpress 25.2\\Components\\Offline Packages",
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/runner/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\arman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 25.2.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\DevExpress 25.2\\Components\\System\\Components\\Packages": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "D:\\nugetpacks\\GenericWebApi\\artifacts\\nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Core/SwiftMediator.Core.csproj": {
-              "projectPath": "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Core/SwiftMediator.Core.csproj"
+            "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Core\\SwiftMediator.Core.csproj": {
+              "projectPath": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Core\\SwiftMediator.Core.csproj"
             }
           }
         }
@@ -1051,7 +1064,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

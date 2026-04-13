@@ -1,25 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Generator/SwiftMediator.Generator.csproj": {}
+    "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Generator\\SwiftMediator.Generator.csproj": {}
   },
   "projects": {
-    "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Generator/SwiftMediator.Generator.csproj": {
-      "version": "2026.4.0",
+    "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Generator\\SwiftMediator.Generator.csproj": {
+      "version": "2026.4.2",
       "restore": {
-        "projectUniqueName": "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Generator/SwiftMediator.Generator.csproj",
+        "projectUniqueName": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Generator\\SwiftMediator.Generator.csproj",
         "projectName": "SwiftMediator.Generator",
-        "projectPath": "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Generator/SwiftMediator.Generator.csproj",
-        "packagesPath": "/home/runner/.nuget/packages/",
-        "outputPath": "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Generator/obj/",
+        "projectPath": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Generator\\SwiftMediator.Generator.csproj",
+        "packagesPath": "C:\\Users\\arman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Generator\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 25.2\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/runner/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\arman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 25.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 25.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "D:\\nugetpacks\\GenericWebApi\\artifacts\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,7 +83,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.201/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

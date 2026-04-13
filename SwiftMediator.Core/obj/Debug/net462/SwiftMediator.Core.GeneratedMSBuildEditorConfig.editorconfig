@@ -1,6 +1,6 @@
 is_global = true
 build_property.RootNamespace = SwiftMediator.Core
-build_property.ProjectDir = D:\Projects\Mediator\SwiftMediator.Core\
+build_property.ProjectDir = C:\Users\arman\OneDrive\Belgeler\GitHub\SwiftMediator\SwiftMediator.Core\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTUseWindowsUIXamlProjections = false

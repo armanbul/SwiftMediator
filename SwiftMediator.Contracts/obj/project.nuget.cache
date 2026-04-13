@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "jZnlQ2G7DnE=",
+  "dgSpecHash": "wQL8u8q28Go=",
   "success": true,
-  "projectFilePath": "/home/runner/work/SwiftMediator/SwiftMediator/SwiftMediator.Contracts/SwiftMediator.Contracts.csproj",
+  "projectFilePath": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\SwiftMediator.Contracts\\SwiftMediator.Contracts.csproj",
   "expectedPackageFiles": [
-    "/home/runner/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "/home/runner/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\arman\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\arman\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }

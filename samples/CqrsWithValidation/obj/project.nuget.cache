@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "yZE8pcGduNo=",
+  "dgSpecHash": "zgamVgtG7e0=",
   "success": true,
-  "projectFilePath": "/home/runner/work/SwiftMediator/SwiftMediator/samples/CqrsWithValidation/CqrsWithValidation.csproj",
+  "projectFilePath": "C:\\Users\\arman\\OneDrive\\Belgeler\\GitHub\\SwiftMediator\\samples\\CqrsWithValidation\\CqrsWithValidation.csproj",
   "expectedPackageFiles": [
-    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.0/microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
-    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0/microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512"
+    "C:\\Users\\arman\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.0\\microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "C:\\Users\\arman\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.0\\microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\arman\\.nuget\\packages\\swiftmediator\\2026.4.2\\swiftmediator.2026.4.2.nupkg.sha512",
+    "C:\\Users\\arman\\.nuget\\packages\\swiftmediator.contracts\\2026.4.2\\swiftmediator.contracts.2026.4.2.nupkg.sha512"
   ],
   "logs": []
 }
